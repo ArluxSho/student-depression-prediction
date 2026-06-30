@@ -11,8 +11,8 @@ This project was developed as part of a Machine Learning research project by mod
 
 | Name | Role |
 |------|------|
-| **[.]** | . |
-| **[.]** | . |
+| **[Aisyah Nurul .S](https://github.com/arluxsho)** | Machine Learning & Application Developer |
+| **[Calista Salsabila](https://github.com/calistasalsabila)** | Machine Learning & Application Developer |
 
 ---
 
@@ -20,7 +20,7 @@ This project was developed as part of a Machine Learning research project by mod
 
 🔗 **Web Application**
 
-https://shield-project-ai.streamlit.app
+https://mind-shield.streamlit.app/
 
 ---
 
@@ -30,11 +30,7 @@ The complete research paper describing the proposed methodology, experiments, fe
 
 📖 **Read Full Paper**
 
-🔗 **[Google Drive Paper Link Here]**
-
-Example:
-
-https://drive.google.com/xxxxxxxxxxxxxxxxxxxxxxxx
+🔗 **[Google Drive Paper Link Here](https://drive.google.com/file/d/1abGlY-RirE4hseyviy2fRCydOfjSZH0X/view?usp=drive_link)**
 
 ---
 
@@ -186,7 +182,7 @@ The SHIELD web application provides:
 ### Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/shield.git
+git clone https://github.com/ArluxSho/mind-shield.git
 ```
 
 Move into the project folder
@@ -216,8 +212,6 @@ streamlit run app.py
 ---
 
 ## 📷 Screenshots
-
-> Add screenshots here
 
 - Dashboard
 - Prediction Form
