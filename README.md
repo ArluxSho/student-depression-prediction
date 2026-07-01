@@ -208,9 +208,19 @@ streamlit run app.py
 ## 📷 Screenshots
 
 - Dashboard
+![alt text](preview/image.png)
+
+- Exploratory Data Analyis
+![alt text](preview/image-2.png)
+
 - Prediction Form
+![alt text](preview/image-1.png)
+
 - Prediction Result
+![alt text](preview/image-3.png)
+
 - SHAP Feature Importance
+![alt text](preview/image-4.png)
 
 ---
 
