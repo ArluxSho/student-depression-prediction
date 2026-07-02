@@ -70,6 +70,7 @@ The dataset contains demographic, academic, lifestyle, and mental health attribu
 
 ### Features
 
+- Gender
 - Age
 - Academic Pressure
 - Study Satisfaction
@@ -78,6 +79,7 @@ The dataset contains demographic, academic, lifestyle, and mental health attribu
 - Have You Ever Had Suicidal Thoughts?
 - Study Hours
 - Financial Stress
+- Family History
 
 Target Variable
 
