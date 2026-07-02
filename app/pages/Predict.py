@@ -3,6 +3,9 @@ import pandas as pd
 import joblib
 import time
 
+# ============================================================
+# KONFIGURASI HALAMAN
+# ============================================================
 st.set_page_config(
     page_title="SHIELD - Prediksi Depresi",
     page_icon="🔮",
@@ -10,6 +13,9 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# ============================================================
+# CUSTOM CSS — tampilan profesional
+# ============================================================
 st.markdown("""
 <style>
     /* Judul di dalam section container */
@@ -52,7 +58,9 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# ============================================================
 # LOAD MODEL
+# ============================================================
 @st.cache_resource
 def load_model():
     return joblib.load('src/model_depresi_8_fitur.pkl')
@@ -64,7 +72,9 @@ TOP_8_FEATURES = [
     'Age', 'Study Satisfaction', 'Study Hours', 'Dietary Habits', 'Sleep Duration'
 ]
 
+# ============================================================
 # SIDEBAR — informasi & petunjuk
+# ============================================================
 with st.sidebar:
     st.caption(
         "⚠️ Alat ini bersifat skrining awal dan **bukan pengganti** "
@@ -72,11 +82,20 @@ with st.sidebar:
         "kesehatan mental yang berkompeten."
     )
 
+# ============================================================
 # HEADER
-st.title("🔮 SHIELD: Deteksi Dini Depresi")
-st.write("Silakan masukkan data profil dan kebiasaan siswa ke dalam formulir di bawah ini. Sistem akan memproses data tersebut menggunakan model Machine Learning yang telah dilatih untuk memprediksi tingkat kerentanan terhadap depresi.")
+# ============================================================
+st.markdown("""
+<div class="main-header">
+    <h1>🔮 SHIELD: Deteksi Dini Depresi</h1>
+    <p>Masukkan data profil dan kebiasaan siswa untuk memperoleh estimasi tingkat kerentanan
+    terhadap depresi menggunakan model Machine Learning yang telah dilatih.</p>
+</div>
+""", unsafe_allow_html=True)
 
+# ============================================================
 # FORM INPUT
+# ============================================================
 with st.form("prediction_form", clear_on_submit=False):
 
     with st.container(border=True):
@@ -117,7 +136,12 @@ with st.form("prediction_form", clear_on_submit=False):
 
     submit_button = st.form_submit_button("🚀 Analisis Data Sekarang", use_container_width=True)
 
+# Label skala 1-5 untuk slider (dipakai di tabel detail)
+SCALE_LABELS = {1: "Sangat Rendah", 2: "Rendah", 3: "Sedang", 4: "Tinggi", 5: "Sangat Tinggi"}
+
+# ============================================================
 # PROSES & HASIL
+# ============================================================
 if submit_button:
     suicidal_map = {"Tidak": 0, "Ya": 1}
     dietary_map = {"Sehat": 0, "Sedang": 1, "Tidak Sehat": 2}
@@ -209,9 +233,54 @@ if submit_button:
             )
 
     with st.expander("🔎 Detail Parameter yang Dianalisis"):
-        st.dataframe(input_df.T.rename(columns={0: "Nilai"}), use_container_width=True)
+        detail_rows = [
+            {
+                "Parameter": "Suicidal Thoughts",
+                "Nilai Input": suicidal_thoughts,
+                "Kode Model": suicidal_map[suicidal_thoughts],
+            },
+            {
+                "Parameter": "Academic Pressure",
+                "Nilai Input": SCALE_LABELS[academic_pressure],
+                "Kode Model": academic_pressure,
+            },
+            {
+                "Parameter": "Financial Stress",
+                "Nilai Input": SCALE_LABELS[financial_stress],
+                "Kode Model": financial_stress,
+            },
+            {
+                "Parameter": "Age",
+                "Nilai Input": f"{age} tahun",
+                "Kode Model": age,
+            },
+            {
+                "Parameter": "Study Satisfaction",
+                "Nilai Input": SCALE_LABELS[study_satisfaction],
+                "Kode Model": study_satisfaction,
+            },
+            {
+                "Parameter": "Study Hours",
+                "Nilai Input": f"{study_hours} jam/hari",
+                "Kode Model": study_hours,
+            },
+            {
+                "Parameter": "Dietary Habits",
+                "Nilai Input": dietary_habits,
+                "Kode Model": dietary_map[dietary_habits],
+            },
+            {
+                "Parameter": "Sleep Duration",
+                "Nilai Input": sleep_duration,
+                "Kode Model": sleep_map[sleep_duration],
+            },
+        ]
+        detail_df = pd.DataFrame(detail_rows)
+        st.dataframe(detail_df, use_container_width=True, hide_index=True)
 
+# ============================================================
 # FOOTER
+# ============================================================
 st.markdown("""
 <div class="disclaimer">
     Sistem SHIELD merupakan alat bantu skrining berbasis Machine Learning dan tidak
